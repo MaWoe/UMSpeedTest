@@ -1,0 +1,5 @@
+*** Variables ***
+@{frank}   12345678901  112233
+@{furter}  09876543210  776655
+
+&{accounts}  frank=${frank}  furter=${furter}  mawoe=${mawoe}

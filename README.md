@@ -1,2 +1,2 @@
 # UMSpeedTest
-Log into UM web interface and run speed test
+Logs into UM web interface and runs the speed test via selenium
