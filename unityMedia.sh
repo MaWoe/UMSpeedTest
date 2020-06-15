@@ -11,4 +11,5 @@ fi
 
 cd $BASE
 
-pybot -v USER_NAME:$1 unityMedia.robot
+rm selenium-screenshot-*.png
+robot -v USER_NAME:$1 unityMedia.robot

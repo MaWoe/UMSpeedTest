@@ -1,5 +1,5 @@
 *** Settings ***
-Library  Selenium2Library
+Library  SeleniumLibrary
 Library  OperatingSystem
 Resource  userAccounts.robot
 Suite Teardown  Close Browser
@@ -8,7 +8,7 @@ Suite Teardown  Close Browser
 
 Test
   Log To Console  Calling login for user "${USER_NAME}"
-  ${account}=  Set Variable  &{accounts}[${USER_NAME}]
+  ${account}=  Set Variable  ${accounts}[${USER_NAME}]
   Login  @{account}
   Start Speedtest
 
@@ -20,6 +20,7 @@ Start Speedtest
   ...  xpath=(//a[text() = "Hilfe & Support"])[1]
   
   Log To Console  Navigated to "Hilfe & Support"
+  Capture Page Screenshot
 
   Wait For Element And Click
   ...  xpath=//span[@class="accordion-title" and text() = "Service Internet"]
@@ -28,14 +29,18 @@ Start Speedtest
   ...  xpath=//span[text() = "Speedtest"]
   
   Log To Console  Starting speedtest ...
+  Capture Page Screenshot 
   
   Wait For Element And Click
   ...  xpath=//p[text() = "Start"]
   
+  Capture Page Screenshot 
+
   Wait Until Page Contains Element
   ...  xpath=//p[text() = "Hier sind Deine Messergebnisse"]
   ...  120 seconds
   
+  Capture Page Screenshot 
   ${download}=  Get Element Attribute
   ...  //div[@id = "download_result"]//*[@data-content="Mbit/s"]  innerText
   
@@ -90,7 +95,8 @@ Open Browser
     ...  ${desired_capabilities}=None
     ...  ${ff_profile_dir}=None
 
-    ${options}=  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+    ${options}=  Evaluate  selenium.webdriver.ChromeOptions()  modules=selenium.webdriver
+
     Call Method  ${options}  add_argument  headless
     ${options}=  Call Method  ${options}  to_capabilities
 
@@ -100,7 +106,7 @@ Open Browser
     ...  command_executor=${remote_url}
     ...  desired_capabilities=${options}
 
-    #Set Window Size  1600  900
+    Set Window Size  1600  900
 
     Go To  ${url}
   
