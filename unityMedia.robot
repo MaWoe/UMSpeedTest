@@ -17,9 +17,9 @@ Test
 Start Speedtest
 
   Wait For Element And Click
-  ...  xpath=(//a[text() = "Hilfe & Support"])[1]
+  ...  xpath=(//a[text() = "Hilfe & Service"])[1]
   
-  Log To Console  Navigated to "Hilfe & Support"
+  Log To Console  Navigated to "Hilfe & Service"
 
   Wait For Element And Click
   ...  xpath=//span[@class="accordion-title" and text() = "Service Internet"]
